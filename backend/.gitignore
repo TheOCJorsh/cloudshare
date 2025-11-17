@@ -1,7 +1,17 @@
-venv/
+# Python
 __pycache__/
 *.pyc
-*.sqlite3
+
+# Django
+db.sqlite3
 media/
 staticfiles/
+
+# Virtual environment
+venv/
+
+# OS
+*.log
+
+# Environment variables
 .env
