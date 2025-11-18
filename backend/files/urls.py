@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import FileUploadView, FileListView, FileDeleteView
+from .views import upload_file, list_files, create_initial_superuser
 
 urlpatterns = [
-    path('upload/', FileUploadView.as_view(), name='file-upload'),
-    path('list/', FileListView.as_view(), name='file-list'),
-    path('delete/<int:pk>/', FileDeleteView.as_view(), name='file-delete'),
+    path("upload/", upload_file),
+    path("list/", list_files),
+    path("init-admin/", create_initial_superuser),  # TEMPORARY
 ]
