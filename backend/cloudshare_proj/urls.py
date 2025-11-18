@@ -34,7 +34,13 @@ from django.conf.urls.static import static
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-from django.shortcuts import render
+from django.contrib import admin
+from django.urls import path, include
+from .views import home
 
-def home(request):
-    return render(request, "home.html")
+urlpatterns = [
+    path("", home, name="home"),
+    path("admin/", admin.site.urls),
+    path("api/files/", include("files.urls")),
+    path("api/token/", include("rest_framework_simplejwt.urls")),
+]
