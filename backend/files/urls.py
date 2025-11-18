@@ -11,6 +11,6 @@ urlpatterns = [
     path("list/", FileListView.as_view(), name="list_files"),
     path("delete/<int:pk>/", FileDeleteView.as_view(), name="delete_file"),
     
-    # Optional helper endpoint to create admin user
+    # Optional helper endpoint to create admin
     path("create-admin/", create_initial_superuser, name="create_admin"),
 ]
