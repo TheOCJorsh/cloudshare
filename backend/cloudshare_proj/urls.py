@@ -2,30 +2,25 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import home_view, create_admin_view, run_migrations_view
 
-from .views import home
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+# simple JWT
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 urlpatterns = [
-    # Landing Page
-    path("", home, name="home"),
-
-    # Admin Panel
-    path("admin/", admin.site.urls),
-
-    # File Sharing APIs
-    path("api/files/", include("files.urls")),
-
-    # JWT Authentication
-    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
-    path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path('', home_view, name='home'),
+    path('admin/', admin.site.urls),
+    path('api/files/', include('files.urls')),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    
+    # FIX: these routes must exist
+    path('run-migrations/', run_migrations_view, name='run_migrations'),
+    path('create-admin/', create_admin_view, name='create_admin'),
 ]
 
-# Serve media files (uploads)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-from .run_migrations import migrate
-
-urlpatterns += [
-    path("run-migrations/", migrate, name="run_migrations"),
-]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
