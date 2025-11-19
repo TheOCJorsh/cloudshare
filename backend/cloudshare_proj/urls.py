@@ -23,3 +23,9 @@ urlpatterns = [
 
 # Serve media files (uploads)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+from .run_migrations import migrate
+
+urlpatterns += [
+    path("run-migrations/", migrate, name="run_migrations"),
+]
