@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>CloudShare Login</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -13,18 +15,17 @@
 <main>
     <h2>Login</h2>
 
-    <label>Username</label>
-    <input type="text" id="username">
+    <label for="username">Username</label>
+    <input type="text" id="username" autocomplete="username">
 
-    <label>Password</label>
-    <input type="password" id="password">
+    <label for="password">Password</label>
+    <input type="password" id="password" autocomplete="current-password">
 
-    <button onclick="login(event)">Login</button>
-    
-    <p id="msg"></p>
+    <button id="loginBtn">Login</button>
+
+    <p id="msg" style="color:crimson;"></p>
 </main>
 
 <script src="app.js"></script>
-
 </body>
 </html>
