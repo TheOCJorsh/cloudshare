@@ -1,5 +1,25 @@
 const BASE_URL = "https://cloudshare-jrla.onrender.com";
 
+function login() {
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+
+    fetch(`${BASE_URL}/api/token/`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({username, password})
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.access) {
+            localStorage.setItem("token", data.access);
+            window.location.href = "upload.html";
+        } else {
+            document.getElementById("msg").innerText = "Invalid login!";
+        }
+    });
+}
+
 async function login(event) {
     event.preventDefault();
 
