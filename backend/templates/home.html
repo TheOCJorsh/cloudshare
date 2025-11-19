@@ -1,19 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CloudShare API</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: white;
+            color: #1a1a1a;
+            padding: 40px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 40px;
+            color: #063970; /* Navy Blue */
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #444;
+        }
+
+        .links {
+            margin-top: 30px;
+        }
+
+        a {
+            display: inline-block;
+            margin: 10px;
+            padding: 12px 20px;
+            background: #063970;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            background: #0a4f9e;
+        }
+
+        .api-list {
+            margin-top: 40px;
+            text-align: left;
+            background: #f3f3f3;
+            padding: 20px;
+            border-radius: 6px;
+        }
+
+        .api-list h3 {
+            color: #063970;
+        }
+
+        .api-list code {
+            background: #e5e5e5;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+    </style>
 </head>
-<body style="font-family: Arial; padding: 40px;">
-    <h1>Welcome to CloudShare API</h1>
 
-    <p>This is the backend API service for the Cloud-Based File Sharing System.</p>
+<body>
+    <div class="container">
+        <h1>CloudShare API</h1>
+        <p>This is a simple and secure cloud-based file sharing system.</p>
+        <p><i>Designed & Developed By Joshua Oghegha.</i></p>
 
-    <h3>Useful Links:</h3>
-    <ul>
-        <li><a href="https://cloudshare-frontend.onrender.com">Access Frontend UI</a></li>
-        <li><a href="/admin">Admin Panel</a></li>
-        <li><a href="/api/files/list/">API: List Files</a></li>
-        <li><a href="/api/token/">API: Token Authentication</a></li>
-    </ul>
+        <div class="links">
+            <a href="/admin/">Admin Panel</a>
+            <a href="https://cloudshare-frontend.onrender.com">Open App</a>
+        </div>
+
+        <div class="api-list">
+            <h3>API Endpoints</h3>
+            <p><b>Login Token:</b> <code>/api/token/</code></p>
+            <p><b>Refresh Token:</b> <code>/api/token/refresh/</code></p>
+            <p><b>Upload File:</b> <code>/api/files/upload/</code></p>
+            <p><b>List Files:</b> <code>/api/files/list/</code></p>
+            <p><b>Delete File:</b> <code>/api/files/delete/&lt;id&gt;/</code></p>
+        </div>
+    </div>
 </body>
 </html>
