@@ -1,9 +1,7 @@
 from django.core.management import call_command
-from django.http import JsonResponse
+from django.http import HttpResponse
 
-def migrate(request):
-    try:
-        call_command("migrate")
-        return JsonResponse({"message": "Migrations applied successfully!"})
-    except Exception as e:
-        return JsonResponse({"error": str(e)})
+def run_migrations(request):
+    call_command('makemigrations')
+    call_command('migrate')
+    return HttpResponse("Migrations completed")
