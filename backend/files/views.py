@@ -42,18 +42,3 @@ class FileDeleteView(APIView):
             return Response({'message': 'File deleted successfully'})
         except File.DoesNotExist:
             return Response({'error': 'File not found'}, status=404)
-
-from django.contrib.auth.models import User
-from django.http import JsonResponse
-
-def create_initial_superuser(request):
-    if User.objects.filter(username="admin").exists():
-        return JsonResponse({"message": "Admin already exists"})
-
-    User.objects.create_superuser(
-        username="admin",
-        password="Admin12345",
-        email="admin@example.com"
-    )
-
-    return JsonResponse({"message": "Admin user created successfully!"})
