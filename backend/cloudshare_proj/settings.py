@@ -33,24 +33,24 @@ INSTALLED_APPS = [
     # Third-party
     'rest_framework',
     'corsheaders',
+    'rest_framework_simplejwt',
 
     # Your app
-    'file',   # ✅ Corrected: Your app folder is "file", NOT "files"
+    'files',   # ✅ Corrected: Your app folder is "file", NOT "files"
 ]
 
 # ============================
 # MIDDLEWARE
 # ============================
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
 
-    # Whitenoise MUST come here (right after security)
+    # Whitenoise for static files on Railway
     'whitenoise.middleware.WhiteNoiseMiddleware',
 
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
-
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -83,7 +83,7 @@ TEMPLATES = [
 ]
 
 # ============================
-# DATABASE (Neon PostgreSQL)
+# DATABASE — Railway + Neon PostgreSQL
 # ============================
 DATABASES = {
     'default': dj_database_url.parse(
