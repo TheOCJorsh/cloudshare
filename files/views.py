@@ -1,8 +1,11 @@
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from django.contrib.auth.models import User
 from .models import File
 from .serializers import FileSerializer
+
 
 # ✅ Upload File
 class FileUploadView(APIView):
@@ -42,3 +45,16 @@ class FileDeleteView(APIView):
             return Response({'message': 'File deleted successfully'})
         except File.DoesNotExist:
             return Response({'error': 'File not found'}, status=404)
+
+# ✅ Create initial superuser (optional helper endpoint)
+@api_view(["POST"])
+def create_initial_superuser(request):
+    if User.objects.filter(is_superuser=True).exists():
+        return Response({"error": "Superuser already exists"}, status=400)
+
+    User.objects.create_superuser(
+        username="admin",
+        email="admin@example.com",
+        password="AdminPass123!"
+    )
+    return Response({"message": "Superuser created successfully"})
