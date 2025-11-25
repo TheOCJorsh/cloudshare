@@ -1,1 +1,1 @@
-web: gunicorn cloudshare_proj.wsgi
+web: gunicorn cloudshare_proj.wsgi:application
