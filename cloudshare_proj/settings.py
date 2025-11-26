@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
 
     # Your app
-    'files',   # ✅ Corrected: Your app folder is "file", NOT "files"
+    'files',   # ✅ Your app folder is name
 ]
 
 # ============================
@@ -115,7 +115,12 @@ USE_TZ = True
 # STATIC FILES
 # ============================
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [
+    BASE_DIR / "static"
+] if (BASE_DIR / "static").exists() else []
+WHITENOISE_AUTOREFRESH = not DEBUG
+
 
 # Enable Whitenoise compressed static file serving
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
