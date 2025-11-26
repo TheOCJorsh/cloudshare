@@ -1,5 +1,5 @@
 // CONFIG — update if your backend URL changes
-const BASE_URL = "https://cloudshare-jrla.onrender.com";
+const BASE_URL = "https://cloudshare-production-eb41.up.railway.app";
 
 // Helper - log wrapper
 const debug = (...args) => {
