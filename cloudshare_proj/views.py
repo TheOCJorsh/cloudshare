@@ -2,9 +2,10 @@ import subprocess
 from django.http import HttpResponse
 from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render
 
 def home_view(request):
-    return HttpResponse("CloudShare Backend Running Successfully.")
+    return render(request, "home.html")
 
 # --- RUN MIGRATIONS (Render-friendly) ---
 def run_migrations_view(request):
