@@ -147,3 +147,13 @@ REST_FRAMEWORK = {
 # DEFAULT AUTOFIELD
 # ============================
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),    # 1 hour access token
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),       # user stays logged in 7 days
+    "ROTATE_REFRESH_TOKENS": False,                    # simple setup
+    "BLACKLIST_AFTER_ROTATION": False,
+    "AUTH_HEADER_TYPES": ("Bearer",),
+}
