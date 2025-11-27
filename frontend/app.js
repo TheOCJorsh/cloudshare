@@ -1,3 +1,6 @@
+formatSize()
+fileIcon()
+
 // CONFIG — update if your backend URL changes
 const BASE_URL = "https://cloudshare-production-eb41.up.railway.app";
 
@@ -141,31 +144,41 @@ async function loadFiles() {
         files.forEach(f => {
             const tr = document.createElement("tr");
 
+            const filename = f.file_name || f.original_name || f.file?.split('/').pop() || "unknown";
+
+            // NAME + ICON
             const nameTd = document.createElement("td");
-            nameTd.textContent = f.file_name || f.original_name || f.file?.split('/').pop() || "unknown";
+            nameTd.innerHTML = `${fileIcon(filename)} &nbsp; ${filename}`;
             tr.appendChild(nameTd);
 
+            // FILE SIZE (formatted)
             const sizeTd = document.createElement("td");
-            sizeTd.textContent = f.size ? (f.size/1024).toFixed(1) : "-";
+            sizeTd.textContent = formatSize(f.size);
             tr.appendChild(sizeTd);
 
+            // DATE
             const dateTd = document.createElement("td");
             dateTd.textContent = f.uploaded_at ? new Date(f.uploaded_at).toLocaleString() : "-";
             tr.appendChild(dateTd);
 
+            // ACTIONS
             const actionTd = document.createElement("td");
+
+            // DELETE BUTTON
             const delBtn = document.createElement("button");
             delBtn.textContent = "Delete";
+            delBtn.className = "btn-delete"; // for styling
             delBtn.addEventListener("click", () => deleteFile(f.id));
             actionTd.appendChild(delBtn);
 
-            // download link
+            // DOWNLOAD LINK
             if (f.file) {
                 const a = document.createElement("a");
                 a.href = `${BASE_URL}${f.file}`;
-                a.textContent = " Download";
-                a.style.marginLeft = "8px";
-                a.setAttribute("target","_blank");
+                a.textContent = "Download";
+                a.className = "btn-download"; // for styling
+                a.style.marginLeft = "10px";
+                a.target = "_blank";
                 actionTd.appendChild(a);
             }
 
@@ -177,6 +190,7 @@ async function loadFiles() {
         document.getElementById("filesMsg").textContent = "Failed to load files (see console).";
     }
 }
+        
 
 // DELETE
 async function deleteFile(id) {
@@ -206,4 +220,33 @@ function logout() {
     localStorage.removeItem("refresh");
     localStorage.removeItem("token");
     window.location.href = "index.html";
+}
+
+function formatSize(bytes) {
+    if (!bytes || isNaN(bytes)) return "-";
+
+    const units = ["B", "KB", "MB", "GB", "TB"];
+    let i = 0;
+    while (bytes >= 1024 && i < units.length - 1) {
+        bytes /= 1024;
+        i++;
+    }
+    return bytes.toFixed(1) + " " + units[i];
+}
+
+function fileIcon(filename) {
+    if (!filename) return "📄";
+
+    const ext = filename.split(".").pop().toLowerCase();
+
+    if (["jpg","jpeg","png","gif","bmp","svg","webp"].includes(ext)) return "🖼️";
+    if (["mp4","mov","avi","mkv","wmv"].includes(ext)) return "🎥";
+    if (["mp3","wav","aac","m4a"].includes(ext)) return "🎵";
+    if (["pdf"].includes(ext)) return "📕";
+    if (["zip","rar","7z","tar","gz"].includes(ext)) return "🗂️";
+    if (["doc","docx"].includes(ext)) return "📝";
+    if (["xls","xlsx"].includes(ext)) return "📊";
+    if (["ppt","pptx"].includes(ext)) return "📈";
+
+    return "📄";  // default
 }

@@ -35,6 +35,70 @@
     <p id="filesMsg"></p>
 </main>
 
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 16px;
+    }
+    th, td {
+        padding: 12px 10px;
+        border-bottom: 1px solid #eee;
+        text-align: left;
+    }
+    th {
+        background: #063970;
+        color: white;
+    }
+    tr:hover {
+        background: #f2f7ff;
+    }
+    .btn-delete {
+        background: #c62828;
+        color: white;
+        padding: 6px 12px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+    .btn-delete:hover {
+        background: #b71c1c;
+    }
+    .btn-download {
+        background: #063970;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 6px;
+        text-decoration: none;
+    }
+    .btn-download:hover {
+        background: #0b4fa2;
+    }
+
+@media screen and (max-width: 600px) {
+    table {
+        font-size: 14px;
+    }
+    th, td {
+        padding: 8px 6px;
+    }
+
+    .btn-delete,
+    .btn-download {
+        padding: 5px 8px;
+        margin-top: 5px;
+        display: inline-block;
+    }
+
+    td:nth-child(4) {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+}
+
+</style>
+
 <script src="app.js"></script>
 </body>
 </html>
