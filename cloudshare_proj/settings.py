@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     # Your app
     'files',   # ✅ Your app folder is name
 ]
-
+# Force rebuild
 # ============================
 # MIDDLEWARE
 # ============================
@@ -119,7 +119,6 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ] if (BASE_DIR / "static").exists() else []
-WHITENOISE_AUTOREFRESH = not DEBUG
 
 
 # Enable Whitenoise compressed static file serving
