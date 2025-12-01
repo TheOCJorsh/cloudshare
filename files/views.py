@@ -5,9 +5,8 @@ from rest_framework.decorators import api_view
 from django.contrib.auth.models import User
 from .models import File
 from .serializers import FileSerializer
-from django.http import FileResponse, Http404
 
-    
+
 # ✅ Upload File
 class FileUploadView(APIView):
     permission_classes = [IsAuthenticated]
@@ -31,19 +30,8 @@ class FileListView(APIView):
 
     def get(self, request):
         files = File.objects.filter(owner=request.user)
-        data = []
-
-        for f in files:
-            data.append({
-                "id": f.id,
-                "file": f.file.url,
-                "file_name": f.file_name,
-                "size": f.size,
-                "uploaded_at": f.uploaded_at,
-                "share_token": f.share_token(),  # 👈 IMPORTANT
-            })
-
-        return Response(data)
+        serializer = FileSerializer(files, many=True)
+        return Response(serializer.data)
 
 # ✅ Delete a specific file
 class FileDeleteView(APIView):
@@ -70,24 +58,3 @@ def create_initial_superuser(request):
         password="AdminPass123!"
     )
     return Response({"message": "Superuser created successfully"})
-
-import base64
-import os
-from django.http import FileResponse, Http404
-
-def public_download_view(request, token):
-    try:
-        decoded = base64.urlsafe_b64decode(token.encode()).decode()
-        file_id, filename = decoded.split("|")
-        file = File.objects.get(id=file_id)
-    except:
-        raise Http404("Invalid or expired link.")
-
-    if not file or not os.path.exists(file.file.path):
-        raise Http404("File not found.")
-
-    return FileResponse(
-        open(file.file.path, "rb"),
-        as_attachment=True,
-        filename=filename
-    )

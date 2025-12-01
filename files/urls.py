@@ -3,8 +3,7 @@ from .views import (
     FileUploadView,
     FileListView,
     FileDeleteView,
-    create_initial_superuser,
-    public_file_download
+    create_initial_superuser
 )
 
 urlpatterns = [
@@ -14,6 +13,4 @@ urlpatterns = [
     
     # Optional helper endpoint to create admin
     path("create-admin/", create_initial_superuser, name="create_admin"),
-    path("public/<str:token>/", public_file_download, name="public_file_download"),
-
 ]
