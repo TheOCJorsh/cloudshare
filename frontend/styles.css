@@ -44,3 +44,39 @@ input[type="file"], input[type="text"], input[type="password"] {
     border-radius: 5px;
     border: 1px solid #ccc;
 }
+
+/* Make table columns wider */
+#fileTable th,
+#fileTable td {
+    padding: 12px 16px;
+}
+
+/* Force wider fixed widths */
+#fileTable th:nth-child(1), 
+#fileTable td:nth-child(1) {
+    width: 35%; /* File Name */
+}
+
+#fileTable th:nth-child(2), 
+#fileTable td:nth-child(2) {
+    width: 15%; /* Size */
+}
+
+#fileTable th:nth-child(3), 
+#fileTable td:nth-child(3) {
+    width: 25%; /* Uploaded At */
+}
+
+#fileTable th:nth-child(4), 
+#fileTable td:nth-child(4) {
+    width: 25%; /* Action */
+}
+
+/* Add space between action buttons */
+#fileTable .btn-delete,
+#fileTable .btn-download,
+#fileTable .btn-share {
+    margin-right: 10px;
+    display: inline-block;
+    white-space: nowrap;
+}
