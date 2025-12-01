@@ -182,6 +182,25 @@ async function loadFiles() {
                 actionTd.appendChild(a);
             }
 
+            // SHARE BUTTON — NEW
+            const shareBtn = document.createElement("button");
+            shareBtn.textContent = "Share";
+            shareBtn.className = "btn-share";
+            shareBtn.style.marginLeft = "10px";
+            shareBtn.addEventListener("click", () => {
+                const token = f.share_token || null;
+
+                if (!token) {
+                    alert("This file has no share token. Backend must expose share_token.");
+                    return;
+                }
+
+                const shareUrl = `${BASE_URL}/api/files/public/${token}/`;
+                navigator.clipboard.writeText(shareUrl);
+                alert("Share link copied:\n\n" + shareUrl);
+            });
+            actionTd.appendChild(shareBtn);
+
             tr.appendChild(actionTd);
             tbody.appendChild(tr);
         });
